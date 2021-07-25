@@ -29,6 +29,6 @@ Most of these mutations have appeared on the ACE2-binding region on Spike, calle
 
 ### Workflow
 
-![Interface flowchart](https://github.com/hackathonismb/Interface-analysis-of-SARS-CoV-2-antibodies-vs-ACE2.git/images/flowchart.pdf)
+![Interface flowchart](https://github.com/hackathonismb/Interface-analysis-of-SARS-CoV-2-antibodies-vs-ACE2.git/images/flowchart.pdf?raw=true))
 
 
