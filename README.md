@@ -29,6 +29,6 @@ Most of these mutations have appeared on the ACE2-binding region on Spike, calle
 
 ### Workflow
 
-
+![Interface flowchart](/Users/belldr/Documents/projects/ismb_hackathon_2021/flowchart/flowchart.pdf)
 
 
