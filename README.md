@@ -55,8 +55,6 @@ npm --version
 
 ```cmd
 npm install three jquery axios querystring
-# install from github does not seem to work
-# npm install git://github.com/ncbi/icn3d
 npm install icn3d
 ```
 
