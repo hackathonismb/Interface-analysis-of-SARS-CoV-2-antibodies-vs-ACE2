@@ -1,4 +1,4 @@
-# Interface analysis of SARS-CoV-2 antibodies vs ACE2
+# SARS2 antibody interfaces
 
 ## Authors
 - Marcus Mendes   mmendes@lji.org
