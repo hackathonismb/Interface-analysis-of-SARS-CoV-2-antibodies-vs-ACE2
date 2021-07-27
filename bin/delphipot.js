@@ -62,7 +62,7 @@ https.get(urlMmdb, function(res1) {
           //console.log('Body: ', res.data);
           let data = res.data.data.replace(/\\n/g, '\n');
           // somehow one extra space was added at the beginning
-          data = data.substr(1);
+          // data = data.substr(1);
           //console.log(data);
           ic.delphiCls.loadCubeData(data, contour, bSurface);
           ic.bAjaxPhi = true;
