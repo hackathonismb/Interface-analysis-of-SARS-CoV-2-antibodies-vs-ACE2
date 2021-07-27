@@ -1,4 +1,4 @@
-# SARS2 antibody interfaces
+# SARS2 antibody interface analysis
 
 ## Authors
 - Marcus Mendes   mmendes@lji.org
