@@ -31,6 +31,7 @@ Most of these mutations have appeared on the ACE2-binding region on Spike, calle
 
 ![Interface flowchart](https://github.com/hackathonismb/Interface-analysis-of-SARS-CoV-2-antibodies-vs-ACE2/blob/main/images/flowchart.png?raw=true)
 
+##
 ## Installation
 
 Assuming you have cloned the git repository and are in the main repository folder. These steps are also found in the setup.md file.
