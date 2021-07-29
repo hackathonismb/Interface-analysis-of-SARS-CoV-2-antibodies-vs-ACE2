@@ -1,0 +1,12 @@
+name: isbm2021hack
+channels:
+  - defaults
+dependencies:
+  - nodejs
+  - python>=3.7
+  - numpy
+  - scipy
+  - matplotlib
+  - scikit-learn
+  - seaborn
+prefix: C:\Users\kzl465\Anaconda3\envs\isbm2021hack
