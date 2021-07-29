@@ -19,7 +19,7 @@ start_time = time.time()
 
 pdbs = []
 potentials = {}
-a = open('all_strs_regions_pot.csv', 'r')
+a = open('all_spike_strs_regions_pot.csv', 'r')
 for line in a:
     mm = line.split(',')
     if len(mm) == 3 and mm[0] != 'PDB ID':
@@ -100,14 +100,14 @@ for sys1 in potentials:
 heatmap_matrix = []
 annotations_matrix = []
 
-for sys1 in pdbs:
+for sys1 in potentials.keys():
     heatmap_row = []
     annotations_row = []
-    for sys2 in pdbs:
+    for sys2 in potentials.keys():
         heatmap_row.append(mean_similarity_distances[sys1, sys2])
         annotations_row.append('{}\n+/- {}'.format(round(
             mean_similarity_distances[sys1, sys2], 2), round(ci95_similarity_distances[sys1, sys2], 2)))
-
+    
     heatmap_matrix.append(heatmap_row)
     annotations_matrix.append(annotations_row)
 
@@ -126,8 +126,8 @@ fig, ax = plt.subplots()
 ax = sns.heatmap(heatmap_matrix, mask=mask, annot=labels, fmt='', annot_kws={
                  "size": 14}, cmap="RdBu_r")  # fmt="0.2f",  cmap="RdBu_r")
 
-row_labels = pdbs
-column_labels = pdbs
+row_labels = list(potentials.keys()) #pdbs
+column_labels = list(potentials.keys()) #pdbs
 
 # put the major ticks at the middle of each cell
 ax.set_yticks(np.arange(len(heatmap_matrix))+0.5, minor=True)
