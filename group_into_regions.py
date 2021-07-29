@@ -13,7 +13,7 @@ for line1 in lines1:
         res_id = line2.split(",")[0]
         pot_value = line2.split(",")[1]
         if res_id not in res_pot_dict:
-            res_pot_dict[res_id] = pot_value
+            res_pot_dict[res_id] = float(pot_value)
     print(res_pot_dict)
 
     res_surface_area = {}
@@ -28,27 +28,48 @@ for line1 in lines1:
             res_details_list = res_details.split(" ")
             res_full_id = res_details_list[1]
             res_full_id_list = res_full_id.split("_")
-            print(res_full_id_list)
+            # print(res_full_id_list)
             residue_id = res_full_id_list[2]+"_"+res_full_id_list[3]
             if residue_id not in res_surface_area:
-                res_surface_area[residue_id] = surface_area
+                res_surface_area[residue_id] = float(surface_area)
     print(res_surface_area)
-    """
-	regions_dict = {}
-	region_pot = 0
-	for res_id in res_pot_dict.keys():
-		res_no = res_id.split("_")[0]
-		
 
-		res_no = int(res_no)
-		if res_no >= 320 and res_no <= 530:
-			if res_no <=340:
+    regions_dict = {}
+    region_pot = 0
+    region_number = 0
+    for res_id in res_pot_dict.keys():
+        # for some reason threw errors where some residues were not in surface area calculation
+        if res_id not in res_surface_area.keys():
+            res_no = int(res_id.split("_")[0])
+            if res_no > 320 and res_no <= 530 and res_no % 10 == 0:
+                region_number = region_number + 1
+                regions_dict['region_{}'.format(region_number)] = region_pot
+                region_pot = 0
 
-				if res_surface_area[res_id] > 80:
-					region_pot = region_pot + res_pot_dict[res_id]
+            continue
 
-			regions_dict['region_1']
+        res_no = res_id.split("_")[0]
 
-			elif res_no >340 and res_no <
-	for i in range(320,531):
-	"""
+        res_no = int(res_no)
+        if res_no >= 320 and res_no <= 530:
+            # if res_no <=340:
+
+            if res_no > 320 and res_no % 10 == 0:
+                if res_surface_area[res_id] >= 80:
+                    region_pot = region_pot + res_pot_dict[res_id]
+
+                elif res_surface_area[res_id] < 80:
+                    region_pot = region_pot + 0
+
+                region_number = region_number + 1
+                regions_dict['region_{}'.format(region_number)] = region_pot
+                region_pot = 0
+
+            elif res_no % 10 != 0:
+                if res_surface_area[res_id] >= 80:
+                    region_pot = region_pot + res_pot_dict[res_id]
+
+                elif res_surface_area[res_id] < 80:
+                    region_pot = region_pot + 0
+
+    print(regions_dict)
