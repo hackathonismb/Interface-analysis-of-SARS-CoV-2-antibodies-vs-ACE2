@@ -1,5 +1,15 @@
 #!/usr/bin/env python
+
+"""
+Extract residual information from PDB files
+
+Map atoms to residual.
+"""
+__author__ = 'Mahita Jarapu'
+
+
 from pathlib import Path
+
 
 data_folder = Path('data')
 
