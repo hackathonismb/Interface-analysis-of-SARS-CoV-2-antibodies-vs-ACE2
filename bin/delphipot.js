@@ -2,7 +2,6 @@
 Please install the following three packages in your directory with the file interaction.js
 npm install three
 npm install jquery
-npm install jsdom
 npm install icn3d
 npm install axios
 npm install querystring
@@ -16,7 +15,7 @@ let me = new icn3d.iCn3DUI({});
 let https = require('https');
 let axios = require('axios');
 let qs = require('querystring');
-// let utils = require('./utils.js');
+let utils = require('./utils.js');
 let myArgs = process.argv.slice(2);
 if(myArgs.length != 2) {
     console.log("Usage: node delphipot.js [PDB ID] [comma-separated Chain IDs]");
@@ -61,15 +60,30 @@ https.get(urlMmdb, function(res1) {
           //console.log(`Status: ${res.status}`);
           //console.log('Body: ', res.data);
           let data = res.data.data.replace(/\\n/g, '\n');
-          // somehow one extra space was added at the beginning
-          data = data.substr(1);
-          //console.log(data);
           ic.delphiCls.loadCubeData(data, contour, bSurface);
           ic.bAjaxPhi = true;
           ic.setOptionCls.setOption('phisurface', 'phi');
+          // calculate surface area
+          ic.analysisCls.calculateArea();
           ic.drawCls.draw();
-          for(var i in ic.atoms) {
-              if(i < 200) console.log(i + ': ' + ic.atoms[i].pot);
+          let resid2pot = {};
+          for(let i in ic.atoms) {
+	 	let atom = ic.atoms[i];
+	 	let resid = atom.structure + '_' + atom.chain + '_' + atom.resi;
+	  	if(!resid2pot.hasOwnProperty(resid)) {
+			resid2pot[resid] = 0;
+			}
+		else {
+			resid2pot[resid] += atom.pot;
+			}
+		}
+	  console.log("Electrostatic potential: (kt/e)");	
+	  for (var resid in resid2pot){
+               console.log(resid + " : " + resid2pot[resid]);
+		}
+          console.log("Solvent accessible surface area: (angstrom square)");
+          for(var resid in ic.resid2area) {
+              console.log("resid: " + resid + ' area: ' + ic.resid2area[resid]);
           }
       })
       .catch(function(err) {

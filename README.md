@@ -1,4 +1,4 @@
-# Interface analysis of SARS-CoV-2 antibodies vs ACE2
+# SARS2 antibody interface analysis
 
 ## Authors
 - Marcus Mendes   mmendes@lji.org
@@ -30,4 +30,41 @@ Most of these mutations have appeared on the ACE2-binding region on Spike, calle
 ### Workflow
 
 ![Interface flowchart](https://github.com/hackathonismb/Interface-analysis-of-SARS-CoV-2-antibodies-vs-ACE2/blob/main/images/flowchart.png?raw=true)
+
+##
+## Installation
+
+Assuming you have cloned the git repository and are in the main repository folder. These steps are also found in the setup.md file.
+
+### Setup a working node js version
+
+One option to do this is to create a conda environment and install nodejs into a new environment
+
+```cmd
+conda create -n isbm2021hack nodejs
+conda activate isbm2021hack
+```
+
+To continue you should have the node package manager (npm) available.
+
+```cmd
+npm --version
+```
+
+### install required node packages
+
+```cmd
+npm install three jquery axios querystring
+npm install icn3d
+```
+
+### DelPhi calculation
+
+Calculate the DelPhi potential map using a nodejs script.
+
+```cmd
+node bin/delphipot.js [PDB ID] [comma-separated Chain IDs] > data/[PBID]
+```
+
+The DelPhi potential map is now located in the data folder.
 
