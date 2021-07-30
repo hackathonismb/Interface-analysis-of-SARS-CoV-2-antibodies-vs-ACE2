@@ -34,14 +34,15 @@ Most of these mutations have appeared on the ACE2-binding region on Spike, calle
 ##
 ## Installation
 
-Assuming you have cloned the git repository and are in the main repository folder. These steps are also found in the setup.md file.
+Assuming you have cloned the git repository and are in the main repository folder. 
+These steps are also found in the setup.md file.
 
 ### Setup a working node js version
 
 One option to do this is to create a conda environment and install nodejs into a new environment
 
 ```cmd
-conda create -n isbm2021hack nodejs
+conda env create -n isbm2021hack -f environment
 conda activate isbm2021hack
 ```
 
@@ -58,6 +59,8 @@ npm install three jquery axios querystring
 npm install icn3d
 ```
 
+## Single Scripts
+
 ### DelPhi calculation
 
 Calculate the DelPhi potential map using a nodejs script.
@@ -68,3 +71,13 @@ node bin/delphipot.js [PDB ID] [comma-separated Chain IDs] > data/[PBID]
 
 The DelPhi potential map is now located in the data folder.
 
+## Snakemake Worflow
+
+The [Snakemake](https://snakemake.readthedocs.io) workflow executes all necessary scripts
+(in development, tbc)
+
+```
+snakemake -c1 -n  # dry-run
+#snakemake -c1 -n -p # dry-run with rule execution preview
+snakemake --cores 3 # execute three jobs in parallel
+```

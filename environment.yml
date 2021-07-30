@@ -1,6 +1,8 @@
 name: isbm2021hack
 channels:
   - defaults
+  - bioconda
+  - conda-forge
 dependencies:
   - nodejs
   - python>=3.7
@@ -9,4 +11,5 @@ dependencies:
   - matplotlib
   - scikit-learn
   - seaborn
-prefix: C:\Users\kzl465\Anaconda3\envs\isbm2021hack
+  - snakemake-minimal
+

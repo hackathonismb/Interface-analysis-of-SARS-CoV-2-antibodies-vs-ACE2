@@ -1,0 +1,3 @@
+DATADIR: data
+SCRIPTDIR: bin
+INFILE: list_pdb_files
