@@ -20,10 +20,14 @@
     - after commenting out the code used for electrostatic potential calculation in the `delphipot_surface.js` script
 4.  Make list of output files generated in step 2 (`input_list_out`)
     - having suffix `*_out`
+    - `out_files`: run script on files in folder `potentials`
 5.  Make list of output files generated in step 3 (`list_surface_files`)
     - having suffix `*_surface`
-6.  Run `remove_undefined.py` on list from step 3
+    - `surface_files`: run script on files in folder `potentials_surface`
+6.  Run `remove_undefined.py` on list from step 4, i.e. `input_list_out`
+    - i.e. on files in folder `potentials`
 7.  Make list of output files generated in step 6 (`list_clean_pot`)
+    - put all into a new cleaned folder
 8. Run `map_atom_to_res.py` using lists from step 7
     - after keeping output files and pdb files in the same folder
 11. make list of csv files generated in step 8
