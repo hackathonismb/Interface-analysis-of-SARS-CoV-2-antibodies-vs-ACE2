@@ -26,6 +26,10 @@ rule target:
         expand(config['DATADIR'] / 'potentials' / "{pdb_id}_{chain}_out.txt", 
                zip,
                pdb_id=PDB_IDS,
+               chain=CHAINS),
+        expand(config['DATADIR'] / 'potentials_surface' / "{pdb_id}_{chain}_surface.txt", 
+               zip,
+               pdb_id=PDB_IDS,
                chain=CHAINS)
 
 
@@ -35,4 +39,12 @@ rule calculate_potential:
     params:
         config['SCRIPTDIR'] / 'delphipot.js'
     shell:
-        "node {params} {wildcards.pdb_id} {wildcards.chain} > {output}"
+        "node {params} {wildcards.pdb_id} {wildcards.chain} res > {output}"
+
+rule calculate_surface_potential:
+    output:
+        config['DATADIR'] / 'potentials_surface' / "{pdb_id}_{chain}_surface.txt"
+    params:
+        config['SCRIPTDIR'] / 'delphipot.js'
+    shell:
+        "node {params} {wildcards.pdb_id} {wildcards.chain} surface > {output}"

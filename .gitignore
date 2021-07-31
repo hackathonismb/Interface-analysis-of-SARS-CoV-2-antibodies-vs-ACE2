@@ -4,3 +4,4 @@ package-lock.json
 data/
 
 *ipynb_checkpoints
+.snakemake
