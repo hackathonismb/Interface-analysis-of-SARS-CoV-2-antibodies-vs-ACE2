@@ -2,6 +2,7 @@
 Please install the following three packages in your directory with the file interaction.js
 npm install three
 npm install jquery
+npm install jsdom
 npm install icn3d
 npm install axios
 npm install querystring
@@ -17,21 +18,12 @@ let axios = require('axios');
 let qs = require('querystring');
 let utils = require('./utils.js');
 let myArgs = process.argv.slice(2);
-if(myArgs.length != 3) {
-    console.error(
-    `Usage: node delphipot.js [PDB ID] [comma-separated Chain IDs mode]
-    
-    Console script to calcualte residual or surface potential
-
-    PDB ID: pdb id
-    chain: selected side-chain(s) comma seperated
-    mode: res or surface`
-    );
+if(myArgs.length != 2) {
+    console.log("Usage: node delphipot.js [PDB ID] [comma-separated Chain IDs]");
     return;
 }
 let pdbid = myArgs[0].toUpperCase(); //'6jxr'; //myArgs[0];
 let chainArray = myArgs[1].split(',');
-let mode = myArgs[2].toLowerCase(); // res or surface
 let baseUrlMmdb = "https://www.ncbi.nlm.nih.gov/Structure/mmdb/mmdb_strview.cgi?v=2&program=icn3d&b=1&s=1&ft=1&complexity=2&uid=";
 let urlMmdb = baseUrlMmdb + pdbid;
 https.get(urlMmdb, function(res1) {
@@ -75,31 +67,14 @@ https.get(urlMmdb, function(res1) {
           // calculate surface area
           ic.analysisCls.calculateArea();
           ic.drawCls.draw();
-          let resid2pot = {};
-          for(let i in ic.atoms) {
-	 	let atom = ic.atoms[i];
-	 	let resid = atom.structure + '_' + atom.chain + '_' + atom.resi;
-	  	if(!resid2pot.hasOwnProperty(resid)) {
-			resid2pot[resid] = 0;
-			}
-		else {
-			resid2pot[resid] += atom.pot;
-			}
-		}
-        if (mode === 'res') {
-            console.log("Electrostatic potential: (kt/e)");	
-            for (var resid in resid2pot){
-                console.log(resid + " : " + resid2pot[resid]);
-            }
-        } else if (mode === 'surface') {
-            console.log("Solvent accessible surface area: (angstrom square)");
-            for(var resid in ic.resid2area) {
-                console.log("resid: " + resid + ' area: ' + ic.resid2area[resid]);
-            }
-        } else {
-            console.error("Choose one of the two modes: res or surface");
-            return;
-        }
+          //console.log("Electrostatic potential: (kt/e)");
+          //for(var i in ic.atoms) {
+           //   console.log(i + ': ' + ic.atoms[i].pot); //if(i < 10) ;
+          //}
+          console.log("Solvent accessible surface area: (angstrom square)");
+          for(var resid in ic.resid2area) {
+             console.log("resid: " + resid + ' area: ' + ic.resid2area[resid]);
+          }
       })
       .catch(function(err) {
           utils.dumpError(err);
@@ -108,3 +83,6 @@ https.get(urlMmdb, function(res1) {
 }).on('error', function(e) {
     console.error("Error: " + pdbid + " has no MMDB data...");
 });
+
+
+
