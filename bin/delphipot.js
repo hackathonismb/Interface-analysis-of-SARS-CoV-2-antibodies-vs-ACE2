@@ -69,7 +69,7 @@ https.get(urlMmdb, function(res1) {
           var resid2pot = {};
           for(let i in ic.atoms) {
 	 	let atom = ic.atoms[i];
-	 	let resid = atom.structure + '_' + atom.chain + '_' + atom.resi;
+	 	let resid = atom.structure + '_' + atom.chain + '_' + atom.resi + '_' + atom.resn;
 	  	if(!resid2pot.hasOwnProperty(resid)) {
 			resid2pot[resid] = 0;
 			}
