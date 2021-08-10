@@ -66,21 +66,26 @@ https.get(urlMmdb, function(res1) {
           // calculate surface area
           ic.analysisCls.calculateArea();
           ic.drawCls.draw();
-          let resid2pot = {};
+          var resid2pot = {};
           for(let i in ic.atoms) {
 	 	let atom = ic.atoms[i];
-	 	let resid = atom.structure + '_' + atom.chain + '_' + atom.resi;
+	 	let resid = atom.structure + '_' + atom.chain + '_' + atom.resi + '_' + atom.resn;
 	  	if(!resid2pot.hasOwnProperty(resid)) {
 			resid2pot[resid] = 0;
 			}
-		else {
+		else if(!isNaN(atom.pot)){
 			resid2pot[resid] += atom.pot;
 			}
 		}
+	for(var i = 0; resid2pot[i]; i++){
+  		for(var key in resid2pot[i]) {
+		    if(resid2pot[i][key] == "0") delete resid2pot[i][key];
+			  }
+			}	
 	  console.log("Electrostatic potential: (kt/e)");	
 	  for (var resid in resid2pot){
                console.log(resid + " : " + resid2pot[resid]);
-		}
+               }
           console.log("Solvent accessible surface area: (angstrom square)");
           for(var resid in ic.resid2area) {
               console.log("resid: " + resid + ' area: ' + ic.resid2area[resid]);
